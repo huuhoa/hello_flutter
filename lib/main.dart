@@ -3,7 +3,6 @@ import 'hello_settings.dart';
 import 'home_page.dart';
 import 'hello_detail.dart';
 
-
 void main() => runApp(new HelloApp());
 
 class HelloApp extends StatefulWidget {
@@ -17,25 +16,29 @@ class HelloAppState extends State<HelloApp> {
     final List<String> path = settings.name.split('/');
     // We only support paths that start with a slash, so bail if
     // the first component is not empty:
-    if (path[0] != '')
+    if (path[0] != '') {
       return null;
+    }
+
     // If the path is "/word:..." then show a stock page for the
     // specified stock symbol.
-    if (path[1].startsWith('word:')) {
-      // We don't yet support subpages of a stock, so bail if there's
-      // any more path components.
-      if (path.length != 2)
-        return null;
-      // Extract the symbol part of "word:..." and return a route
-      // for that symbol.
-      final String symbol = path[1].substring(5);
-      return new MaterialPageRoute<Null>(
-        settings: settings,
-        builder: (BuildContext context) => new HelloDetailPage(word: symbol),
-      );
+    if (!path[1].startsWith('word:')) {
+      // The other paths we support are in the routes table.
+      return null;
     }
-    // The other paths we support are in the routes table.
-    return null;
+    // We don't yet support subpages of a stock, so bail if there's
+    // any more path components.
+    if (path.length != 2) {
+      return null;
+    }
+
+    // Extract the symbol part of "word:..." and return a route
+    // for that symbol.
+    final String symbol = path[1].substring(5);
+    return new MaterialPageRoute<Null>(
+      settings: settings,
+      builder: (BuildContext context) => new HelloDetailPage(word: symbol),
+    );
   }
 
   @override
@@ -54,7 +57,8 @@ class HelloAppState extends State<HelloApp> {
         primarySwatch: Colors.red,
       ),
       routes: <String, WidgetBuilder>{
-        '/':         (BuildContext context) => new MyHomePage(title: 'Flutter Hello World'),
+        '/': (BuildContext context) =>
+            new MyHomePage(title: 'Flutter Hello World'),
         '/settings': (BuildContext context) => new HelloSettings()
       },
       onGenerateRoute: _getRoute,

@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 
 class HelloSettings extends StatefulWidget {
-
   @override
   HelloSettingsState createState() => new HelloSettingsState();
 }
 
 class HelloSettingsState extends State<HelloSettings> {
-
   Widget buildAppBar(BuildContext context) {
-    return new AppBar(
-        title: const Text('Settings')
-    );
+    return new AppBar(title: const Text('Settings'));
   }
 
-  void _confirmOptimismChange(bool value) {
-
-  }
+  void _confirmOptimismChange(bool value) {}
 
   Widget buildSettingsPane(BuildContext context) {
     final List<Widget> rows = <Widget>[
@@ -47,8 +41,6 @@ class HelloSettingsState extends State<HelloSettings> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: buildAppBar(context),
-        body: buildSettingsPane(context)
-    );
+        appBar: buildAppBar(context), body: buildSettingsPane(context));
   }
 }
